@@ -7,7 +7,7 @@
 <style>
 body {
     background: #ffeef2;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     text-align: center;
     padding: 30px;
 }
@@ -21,6 +21,10 @@ body {
     max-width: 400px;
 }
 
+h2 {
+    color: #ff4d6d;
+}
+
 button {
     margin-top: 20px;
     padding: 10px 20px;
@@ -32,24 +36,29 @@ button {
 }
 
 .frase {
+    opacity: 0;
+    transition: 1s;
     margin-top: 15px;
-    display: none;
 }
 
 .gato {
     width: 120px;
     margin: 10px;
-    display: none;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: 0.8s;
     border-radius: 15px;
 }
 
 #presenteBtn {
     display: none;
+    margin-top: 20px;
     background: #ff85a2;
 }
 
-#final {
-    display: none;
+#mensagemFinal {
+    opacity: 0;
+    transition: 1s;
     margin-top: 15px;
     font-weight: bold;
 }
@@ -60,15 +69,17 @@ button {
 <body>
 
 <div class="box">
-    <h2>Oi meu bem, novo recado para você 🐱💛</h2>
+    <h2>
+        Oi meu bem, novo recado para você 🐱💛
+    </h2>
 
-    <button onclick="iniciar()">Clica aqui 🐾</button>
+    <button onclick="mostrar()">Clica aqui 🐾</button>
 
     <div id="conteudo"></div>
 
-    <button id="presenteBtn" onclick="mostrarFinal()">🎁 Presente pra você</button>
+    <button id="presenteBtn" onclick="mostrarPresente()">🎁 Presente pra você</button>
 
-    <p id="final">Vale beijinhos e carinho 💛</p>
+    <p id="mensagemFinal">Vale beijinhos e carinho 💛</p>
 </div>
 
 <script>
@@ -83,7 +94,7 @@ let gatos = [
 "gatinho2.jpeg"
 ];
 
-function iniciar() {
+function mostrar() {
     let div = document.getElementById("conteudo");
     div.innerHTML = "";
 
@@ -94,9 +105,32 @@ function iniciar() {
         div.appendChild(p);
 
         setTimeout(() => {
-            p.style.display = "block";
-        }, i * 1500);
+            p.style.opacity = 1;
+        }, i * 1800);
     });
 
     gatos.forEach((src, i) => {
-        let img = document
+        let img = document.createElement("img");
+        img.src = src;
+        img.className = "gato";
+        div.appendChild(img);
+
+        setTimeout(() => {
+            img.style.opacity = 1;
+            img.style.transform = "scale(1)";
+        }, (mensagens.length * 1800) + (i * 800));
+    });
+
+    setTimeout(() => {
+        document.getElementById("presenteBtn").style.display = "inline-block";
+    }, (mensagens.length * 1800) + (gatos.length * 800) + 500);
+}
+
+function mostrarPresente() {
+    let msg = document.getElementById("mensagemFinal");
+    msg.style.opacity = 1;
+}
+</script>
+
+</body>
+</html>
