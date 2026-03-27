@@ -94,9 +94,11 @@ let gatos = [
 "gatinho2.jpeg"
 ];
 
-function mostrar() {
-    let div = document.getElementById("conteudo");
-    div.innerHTML = "";
+function mostrarPresente() {
+    let msg = document.getElementById("mensagemFinal");
+    msg.style.opacity = 1;
+    msg.style.display = "block";
+};
 
     mensagens.forEach((texto, i) => {
         let p = document.createElement("p");
